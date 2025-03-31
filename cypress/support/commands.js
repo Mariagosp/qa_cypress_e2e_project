@@ -62,3 +62,29 @@ Cypress.Commands.add('login', (email = 'riot@qa.team', username = 'riot', passwo
   });
 });
 
+Cypress.Commands.add('createArticle', (title, description, body) => {
+  cy.getCookie('drash_sess').then((token) => {
+    const authToken = token.value;
+
+    cy.request({
+      method: 'POST',
+      url: '/articles',
+      body: {
+        article: {
+          title,
+          description,
+          body,
+          tagList: []
+        }
+      },
+      headers: {
+        Authorization: `Token ${authToken}`
+      }
+    });
+  });
+});
+
+Cypress.Commands.add('assertPageUrl', (url) => {
+  cy.url().should('equal', Cypress.config().baseUrl + '#' + url);
+})
+
