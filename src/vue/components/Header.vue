@@ -22,7 +22,7 @@
             exact
             :to="{ name: 'login' }"
           >
-            <i class="ion-compose"></i>Sign in
+            <i data-cy="sign-in" class="ion-compose"></i>Sign in
           </router-link>
         </li>
         <li class="nav-item">

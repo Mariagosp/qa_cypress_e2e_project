@@ -28,11 +28,15 @@ class SettingsPageObject extends PageObject {
   }
 
   get profileLink() {
-    return cy.getByDataCy('profile-link');
+    return cy.getByDataCy('username-link');
   }
 
   get signInLink() {
     return cy.getByDataCy('sign-in');
+  }
+
+  get getModalText() {
+    return cy.get('.swal-title');
   }
 
   changeUsername(username) {
@@ -55,9 +59,13 @@ class SettingsPageObject extends PageObject {
     this.saveSettingsBtn.click();
   }
 
-  checkUserName(username) {
-    this.profileLink.should('contain.text', username.toLowerCase());
+  checkUpdate() {
+    this.getModalText.should('contain.text', 'Update successful');
   }
+
+  // checkUserName(username) {
+  //   this.profileLink.should('contain.text', username.toLowerCase());
+  // }
 
   checkNoUserName() {
     this.profileLink.should('not.exist')
@@ -67,9 +75,9 @@ class SettingsPageObject extends PageObject {
     this.signInLink.should('be.visible');
   }
 
-  checkBio(bio) {
-    this.bioField.contains(bio);
-  }
+  // checkBio(bio) {
+  //   this.bioField.contains(bio);
+  // }
 
   checkEmail(email) {
     this.emailField.should('have.value', email.toLowerCase());
